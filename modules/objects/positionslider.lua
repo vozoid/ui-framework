@@ -20,6 +20,7 @@ function PositionSlider(slider, ball, min, max, tweenInfo)
         local sizeX = math.clamp((input.Position.X - slider.AbsolutePosition.X) / slider.AbsoluteSize.X, 0, 1)
         local posX = math.clamp(sizeX * slider.AbsoluteSize.X, 0, slider.AbsoluteSize.X - ball.AbsoluteSize.X)
         local valX = posX / (slider.AbsoluteSize.X - ball.AbsoluteSize.X)
+        
         framework.tween(ball, tweenInfo, {Position = UDim2.new(0, posX, 0, 0)})
 
         local value = math.floor((((max - min) * valX) + min))
