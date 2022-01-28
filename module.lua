@@ -18,7 +18,7 @@ if readfile("ui-framework/version.txt") ~= game:HttpGet("https://raw.githubuserc
     writefile("ui-framework/modules/objects/toggle.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/toggle.lua"))
     writefile("ui-framework/modules/objects/box.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/box.lua"))
 
-    writefile("ui-framework/version.txt", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/version"))
+    writefile("ui-framework/version.txt", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/version.txt"))
 end
 
 local framework = loadstring(readfile("ui-framework/modules/framework.lua"))()
