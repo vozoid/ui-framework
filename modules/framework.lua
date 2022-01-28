@@ -38,12 +38,6 @@ function framework.import(file)
     return loadstring(readfile(("ui-framework/modules/objects/%s.lua"):format(file)))()
 end
 
-function framework.save(name, file, branch)
-    local branch = branch or "objects"
-    local link = game:HttpGet(("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/%s/%s.lua"):format(branch, file))
-    writefile(name, link)
-end
-
 function framework.create(object)
     local object = Instance.new(class)
 
