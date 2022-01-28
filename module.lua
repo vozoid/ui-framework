@@ -11,7 +11,6 @@ end
 if readfile("ui-framework/version.txt") ~= game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/version.txt") then
     delfolder("ui-framework")
     makefolder("ui-framework")
-    writefile("ui-framework/version.txt", "")
 
     makefolder("ui-framework/modules")
     -- modules
