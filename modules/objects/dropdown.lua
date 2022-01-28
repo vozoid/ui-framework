@@ -49,6 +49,45 @@ function Dropdown(object, content, template)
         end
     end
 
+    function dropdownTypes:Refresh(tbl)
+        content = tbl
+
+        framework.dropdowns.current = nil
+        dropdownTypes.Updated:Fire(nil, nil)
+        dropdownTypes.NoneChosen:Fire()
+
+        dropdownTypes.Refreshed:Fire(tbl)
+
+        for i, obj in next, instances do
+            obj:Destroy()
+            table.remove(instances, table.find(instances, i))
+        end
+
+        for _, option in next, content do
+            local obj = template:Clone()
+            obj.Parent = object
+            
+            if obj.ClassName:find("Text") then
+                obj.Text = option
+            end
+    
+            instances[option] = obj
+            table.insert(framework.dropdowns, obj)
+    
+            obj.InputBegan:Connect(function(input)
+                if input.UserInputType == Enum.UserInputType.MouseButton1 then
+                    if framework.dropdowns.current ~= option then
+                        framework.dropdowns.current = option
+                        dropdownTypes.Updated:Fire(option, obj)
+                    else
+                        dropdownTypes.Updated:Fire(nil, nil)
+                        dropdownTypes.NoneChosen:Fire()
+                    end
+                end
+            end)
+        end
+    end
+
     function dropdownTypes:Remove(option)
         if instances[option] then
             instances[option]:Destroy()
