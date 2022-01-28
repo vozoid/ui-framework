@@ -7,6 +7,7 @@ if not isfile("ui-framework/version.txt") then
 end
 
 if readfile("ui-framework/version.txt") ~= game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/version.txt") then
+    print("hi")
     makefolder("ui-framework/modules")
     -- modules
     writefile("ui-framework/modules/signal.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/signal-library/main/main.lua"))
