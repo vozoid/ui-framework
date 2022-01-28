@@ -38,7 +38,7 @@ function framework.import(file)
     return loadstring(readfile(("ui-framework/modules/objects/%s.lua"):format(file)))()
 end
 
-function framework:Create(object)
+function framework.create(object)
     local object = Instance.new(class)
 
     for prop, v in next, properties do
@@ -54,7 +54,7 @@ function framework:Create(object)
     return obj
 end
 
-function framework:Tween(obj, info, properties, callback)
+function framework.tween(obj, info, properties, callback)
     local anim = tweenService:Create(obj, TweenInfo.new(unpack(info)), properties)
     anim:Play()
 
@@ -63,7 +63,7 @@ function framework:Tween(obj, info, properties, callback)
     end
 end
 
-function framework:Dragify(object, speed)
+function framework.dragify(object, speed)
     local start, objectPosition, dragging
 
     speed = speed or 0
@@ -84,7 +84,7 @@ function framework:Dragify(object, speed)
 
     inputService.InputChanged:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseMovement and dragging then   
-            framework:Tween(object, {speed}, {Position = UDim2.new(objectPosition.X.Scale, objectPosition.X.Offset + (input.Position - start).X, objectPosition.Y.Scale, objectPosition.Y.Offset + (input.Position - start).Y)})
+            framework.tween(object, {speed}, {Position = UDim2.new(objectPosition.X.Scale, objectPosition.X.Offset + (input.Position - start).X, objectPosition.Y.Scale, objectPosition.Y.Offset + (input.Position - start).Y)})
         end
     end)
 end
