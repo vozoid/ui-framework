@@ -6,13 +6,23 @@ local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/voz
 
 local gui = Instance.new("ScreenGui", game.CoreGui)
 
-local btn = Instance.new("Frame", gui)
-btn.Size = UDim2.new(0, 50, 0, 50)
-btn.Position = UDim2.new(0.2, 0, 0.2, 0)
+local slider = Instance.new("Frame", gui)
+slider.Size = UDim2.new(0, 200, 0, 50)
+slider.Position = UDim2.new(0.2, 0, 0.2, 0)
+slider.Parent = gui
 
-local toggle = framework.toggle(btn)
+local ball = Instance.new("Frame", gui)
+ball.Size = UDim2.new(0, 10, 1, 0)
+ball.Position = UDim2.new(0, 0, 0, 0)
+ball.Parent = slider
+ball.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 
-toggle.Toggled:connect(function(bool) 
-    btn.BackgroundTransparency = bool and 0.5 or 0
+
+local sliderfunc = framework.positionslider(btn, btn2, 0, 30, 0.1)
+
+sliderfunc.updated:connect(function(val) 
+    print(val)
 end)
+
+sliderfunc:set(20)
 ```
