@@ -35,7 +35,7 @@ framework = framework.format_table(framework)
 framework.forcedProperties = {}
 
 function framework.import(branch, file)
-    return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/vozoid/ui-framework/%s/%s.lua"):format(branch, file .. ".lua")))()
+    return loadstring(game:HttpGetAsync(("https://raw.githubusercontent.com/vozoid/ui-framework/%s/%s.lua"):format(branch, file)))()
 end
 
 function framework:Create(object)
