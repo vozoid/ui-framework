@@ -1,3 +1,5 @@
+requires isfile, writefile, readfile, makefolder, isfolder
+
 example
 ```lua
 local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/module.lua"))()
