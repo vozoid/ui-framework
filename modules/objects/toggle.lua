@@ -1,4 +1,4 @@
-local framework = loadstring(game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/framework.lua"))()
+local framework = loadstring(readfile("ui-framework/modules/framework.lua"))()
 
 function Toggle(object)
     local toggled = false
