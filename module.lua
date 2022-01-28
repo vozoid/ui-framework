@@ -1,3 +1,5 @@
+local objects = {"button", "toggle", "box"}
+
 if not isfolder("ui-framework") then
     makefolder("ui-framework")
 end
@@ -14,16 +16,17 @@ if readfile("ui-framework/version.txt") ~= game:HttpGet("https://raw.githubuserc
 
     makefolder("ui-framework/modules/objects")
     -- objects
-    writefile("ui-framework/modules/objects/button.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/button.lua"))
-    writefile("ui-framework/modules/objects/toggle.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/toggle.lua"))
-    writefile("ui-framework/modules/objects/box.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/box.lua"))
+    for _, object in next, objects do
+    writefile(("ui-framework/modules/objects/%s.lua"):format(object), game:HttpGet(("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/%s.lua"):format(object)))
+    end
 
     writefile("ui-framework/version.txt", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/version.txt"))
 end
 
 local framework = loadstring(readfile("ui-framework/modules/framework.lua"))()
-framework.button = framework.import("button")
-framework.toggle = framework.import("toggle")
-framework.box = framework.import("box")
+
+for _, object in next, objects do
+    framework[object] = framework.import(object)
+end
 
 return framework
