@@ -35,7 +35,7 @@ framework = framework.format_table(framework)
 framework.forcedProperties = {}
 
 function framework.import(file)
-    return loadstring(game:HttpGet(("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/%s.lua"):format(file)))()
+    return loadstring(readfile(("ui-framework/modules/objects/%s.lua"):format(file)))()
 end
 
 function framework:Create(object)
