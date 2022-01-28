@@ -18,7 +18,8 @@ ball.Parent = slider
 ball.BackgroundColor3 = Color3.fromRGB(255, 255, 255)
 
 
-local sliderfunc = framework.positionslider(btn, btn2, 0, 30, 0.1)
+local sliderfunc = framework.positionslider(slider, ball, 0, 30, 0.1)
+-- framework.PositionSlider(slider, ball, min, max, tweenSpeed (default 0))
 
 sliderfunc.updated:connect(function(val) 
     print(val)
