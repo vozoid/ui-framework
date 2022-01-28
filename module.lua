@@ -1,4 +1,4 @@
-local objects = {"button", "toggle", "box", "size-slider"}
+local objects = {"button", "toggle", "box", "sizeslider"}
 
 if not isfolder("ui-framework") then
     makefolder("ui-framework")
