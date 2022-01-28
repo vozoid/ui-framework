@@ -1,11 +1,10 @@
 local framework = loadstring(readfile("ui-framework/modules/framework.lua"))()
 
-framework.dropdowns = {}
-framework.dropdowns.current = nil
-
 function Dropdown(object, content, template)
     local dropdownTypes = {
         Updated = framework.signal.new(),
+        Chosen = framework.signal.new(),
+        Unchosen = framework.signal.new(),
         NoneChosen = framework.signal.new(),
         Refreshed = framework.signal.new(),
         Removed = framework.signal.new(),
@@ -13,6 +12,7 @@ function Dropdown(object, content, template)
     }
 
     local instances = {}
+    local current = nil
 
     dropdownTypes = framework.format_table(dropdownTypes)
 
@@ -25,15 +25,17 @@ function Dropdown(object, content, template)
         end
 
         instances[option] = obj
-        table.insert(framework.dropdowns, obj)
 
         obj.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                if framework.dropdowns.current ~= option then
-                    framework.dropdowns.current = option
-                    dropdownTypes.Updated:Fire(option, obj)
+                if current ~= option then
+                    current = option
+                    dropdownTypes.Chosen:Fire(option, instances[option])
+                    dropdownTypes.Updated:Fire(option, instances[option])
                 else
+                    current = nil
                     dropdownTypes.Updated:Fire(nil, nil)
+                    dropdownTypes.Unchosen:Fire(option, instances[option])
                     dropdownTypes.NoneChosen:Fire()
                 end
             end
@@ -41,9 +43,16 @@ function Dropdown(object, content, template)
     end
 
     function dropdownTypes:Set(option)
+        if option == nil then
+            current = nil
+            dropdownTypes.Updated:Fire(nil, nil)
+            dropdownTypes.NoneChosen:Fire()
+        end
+
         if instances[option] then
-            if framework.dropdowns.current ~= option then
-                framework.dropdowns.current = option
+            if current ~= option then
+                current = option
+                dropdownTypes.Chosen:Fire(option, instances[option])
                 dropdownTypes.Updated:Fire(option, instances[option])
             end
         end
@@ -52,7 +61,7 @@ function Dropdown(object, content, template)
     function dropdownTypes:Refresh(tbl)
         content = tbl
 
-        framework.dropdowns.current = nil
+        current = nil
         dropdownTypes.Updated:Fire(nil, nil)
         dropdownTypes.NoneChosen:Fire()
 
@@ -72,15 +81,17 @@ function Dropdown(object, content, template)
             end
     
             instances[option] = obj
-            table.insert(framework.dropdowns, obj)
     
             obj.InputBegan:Connect(function(input)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                    if framework.dropdowns.current ~= option then
-                        framework.dropdowns.current = option
-                        dropdownTypes.Updated:Fire(option, obj)
+                    if current ~= option then
+                        current = option
+                        dropdownTypes.Chosen:Fire(option, instances[option])
+                        dropdownTypes.Updated:Fire(option, instances[option])
                     else
+                        current = nil
                         dropdownTypes.Updated:Fire(nil, nil)
+                        dropdownTypes.Unchosen:Fire(option, instances[option])
                         dropdownTypes.NoneChosen:Fire()
                     end
                 end
@@ -94,7 +105,7 @@ function Dropdown(object, content, template)
             dropdownTypes.Removed:Fire(option, instances[option])
             table.remove(instances, table.find(instances, option))
 
-            if framework.dropdowns.current == option then
+            if current == option then
                 dropdownTypes.Updated:Fire(nil, nil)
                 dropdownTypes.NoneChosen:Fire()
             end
@@ -112,15 +123,17 @@ function Dropdown(object, content, template)
         dropdownTypes.Added:Fire(option, obj)
 
         instances[option] = obj
-        table.insert(framework.dropdowns, obj)
 
         obj.InputBegan:Connect(function(input)
             if input.UserInputType == Enum.UserInputType.MouseButton1 then
-                if framework.dropdowns.current ~= option then
-                    framework.dropdowns.current = option
-                    dropdownTypes.Updated:Fire(option, obj)
+                if current ~= option then
+                    current = option
+                    dropdownTypes.Chosen:Fire(option, instances[option])
+                    dropdownTypes.Updated:Fire(option, instances[option])
                 else
+                    current = nil
                     dropdownTypes.Updated:Fire(nil, nil)
+                    dropdownTypes.Unchosen:Fire(option, instances[option])
                     dropdownTypes.NoneChosen:Fire()
                 end
             end
