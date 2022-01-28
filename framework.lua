@@ -30,7 +30,7 @@ function framework.format_table(tbl)
     end
 end
 
-framework = utility.format_table(framework)
+framework = framework.format_table(framework)
 
 framework.forcedProperties = {}
 
