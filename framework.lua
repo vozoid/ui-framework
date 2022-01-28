@@ -88,3 +88,5 @@ function framework:Dragify(object, speed)
         end
     end)
 end
+
+return framework
