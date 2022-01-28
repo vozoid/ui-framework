@@ -9,6 +9,10 @@ if not isfile("ui-framework/version.txt") then
 end
 
 if readfile("ui-framework/version.txt") ~= game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/version.txt") then
+    delfolder("ui-framework")
+    makefolder("ui-framework")
+    writefile("ui-framework/version.txt", "")
+
     makefolder("ui-framework/modules")
     -- modules
     writefile("ui-framework/modules/signal.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/signal-library/main/main.lua"))
@@ -17,7 +21,7 @@ if readfile("ui-framework/version.txt") ~= game:HttpGet("https://raw.githubuserc
     makefolder("ui-framework/modules/objects")
     -- objects
     for _, object in next, objects do
-    writefile(("ui-framework/modules/objects/%s.lua"):format(object), game:HttpGet(("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/%s.lua"):format(object)))
+        writefile(("ui-framework/modules/objects/%s.lua"):format(object), game:HttpGet(("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/objects/%s.lua"):format(object)))
     end
 
     writefile("ui-framework/version.txt", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/version.txt"))
