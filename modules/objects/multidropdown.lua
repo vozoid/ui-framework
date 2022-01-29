@@ -3,9 +3,9 @@ local framework = loadstring(readfile("ui-framework/modules/framework.lua"))()
 function MultiDropdown(object, content, template)
     local dropdownTypes = {
         Updated = framework.signal.new(),
-        Chosen = framework.signal.new(),
-        Unchosen = framework.signal.new(),
-        NoneChosen = framework.signal.new(),
+        Selected = framework.signal.new(),
+        Deselected = framework.signal.new(),
+        NoneSelected = framework.signal.new(),
         Refreshed = framework.signal.new(),
         Removed = framework.signal.new(),
         Added = framework.signal.new()
@@ -32,16 +32,16 @@ function MultiDropdown(object, content, template)
                 if not table.find(chosen, option) then
                     table.insert(chosen, option)
                     table.insert(chosenInstances, instances[option])
-                    dropdownTypes.Chosen:Fire(option, instances[option])
+                    dropdownTypes.Selected:Fire(option, instances[option])
                     dropdownTypes.Updated:Fire(chosen, chosenInstances)
                 else
                     table.remove(chosen, table.find(chosen, option))
                     table.remove(chosenInstances, table.find(chosenInstances, instances[option]))
-                    dropdownTypes.Unchosen:Fire(option, instances[option])
+                    dropdownTypes.Deselected:Fire(option, instances[option])
                     dropdownTypes.Updated:Fire(chosen, chosenInstances)
 
                     if #chosen < 1 then
-                        dropdownTypes.NoneChosen:Fire()
+                        dropdownTypes.NoneSelected:Fire()
                     end
                 end
             end
@@ -51,7 +51,7 @@ function MultiDropdown(object, content, template)
     function dropdownTypes:Set(option)
         if option == nil then
             dropdownTypes.Updated:Fire(nil, nil)
-            dropdownTypes.NoneChosen:Fire()
+            dropdownTypes.NoneSelected:Fire()
         end
 
         if typeof(option) == "table" then
@@ -59,7 +59,7 @@ function MultiDropdown(object, content, template)
                 if not table.find(chosen, opt) then
                     table.insert(chosen, opt)
                     table.insert(chosenInstances, instances[option])
-                    dropdownTypes.Chosen:Fire(option, instances[option])
+                    dropdownTypes.Selected:Fire(option, instances[option])
                     dropdownTypes.Updated:Fire(chosen, chosenInstances)
                 end
             end
@@ -67,7 +67,7 @@ function MultiDropdown(object, content, template)
             if not table.find(chosen, option) then
                 table.insert(chosen, option)
                 table.insert(chosenInstances, instances[option])
-                dropdownTypes.Chosen:Fire(option, instances[option])
+                dropdownTypes.Selected:Fire(option, instances[option])
                 dropdownTypes.Updated:Fire(chosen, chosenInstances)
             end
         end
@@ -79,7 +79,7 @@ function MultiDropdown(object, content, template)
         chosen = {}
         chosenInstances = {}
         dropdownTypes.Updated:Fire({}, {})
-        dropdownTypes.NoneChosen:Fire()
+        dropdownTypes.NoneSelected:Fire()
 
         dropdownTypes.Refreshed:Fire(tbl)
 
@@ -103,16 +103,16 @@ function MultiDropdown(object, content, template)
                     if not table.find(chosen, option) then
                         table.insert(chosen, option)
                         table.insert(chosenInstances, instances[option])
-                        dropdownTypes.Chosen:Fire(option, instances[option])
+                        dropdownTypes.Selected:Fire(option, instances[option])
                         dropdownTypes.Updated:Fire(chosen, chosenInstances)
                     else
                         table.remove(chosen, table.find(chosen, option))
                         table.remove(chosenInstances, table.find(chosenInstances, instances[option]))
-                        dropdownTypes.Unchosen:Fire(option, instances[option])
+                        dropdownTypes.Deselected:Fire(option, instances[option])
                         dropdownTypes.Updated:Fire(chosen, chosenInstances)
     
                         if #chosen < 1 then
-                            dropdownTypes.NoneChosen:Fire()
+                            dropdownTypes.NoneSelected:Fire()
                         end
                     end
                 end
@@ -129,7 +129,7 @@ function MultiDropdown(object, content, template)
                 if table.find(chosen, opt) then
                     table.remove(chosen, table.find(chosen, opt))
                     table.remove(chosenInstances, table.find(chosenInstances, opt))
-                    dropdownTypes.Unchosen:Fire(option, instances[option])
+                    dropdownTypes.Deselected:Fire(option, instances[option])
                     dropdownTypes.Updated:Fire(chosen, chosenInstances)
                 end
             end
@@ -140,7 +140,7 @@ function MultiDropdown(object, content, template)
             if table.find(chosen, option) then
                 table.remove(chosen, table.find(chosen, option))
                 table.insert(chosenInstances, table.find(chosenInstances, instances[option]))
-                dropdownTypes.Unchosen:Fire(option, instances[option])
+                dropdownTypes.Deselected:Fire(option, instances[option])
                 dropdownTypes.Updated:Fire(chosen, chosenInstances)
             end
         end
@@ -163,16 +163,16 @@ function MultiDropdown(object, content, template)
                 if not table.find(chosen, option) then
                     table.insert(chosen, option)
                     table.insert(chosenInstances, instances[option])
-                    dropdownTypes.Chosen:Fire(option, instances[option])
+                    dropdownTypes.Selected:Fire(option, instances[option])
                     dropdownTypes.Updated:Fire(chosen, chosenInstances)
                 else
                     table.remove(chosen, table.find(chosen, option))
                     table.remove(chosenInstances, table.find(chosenInstances, instances[option]))
-                    dropdownTypes.Unchosen:Fire(option, instances[option])
+                    dropdownTypes.Deselected:Fire(option, instances[option])
                     dropdownTypes.Updated:Fire(chosen, chosenInstances)
 
                     if #chosen < 1 then
-                        dropdownTypes.NoneChosen:Fire()
+                        dropdownTypes.NoneSelected:Fire()
                     end
                 end
             end
