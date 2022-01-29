@@ -1,4 +1,4 @@
-requires isfile, writefile, readfile, makefolder, isfolder
+module requires isfile, writefile, readfile, makefolder, isfolder
 
 example
 ```lua
