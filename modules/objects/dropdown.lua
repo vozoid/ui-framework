@@ -3,9 +3,9 @@ local framework = loadstring(readfile("ui-framework/modules/framework.lua"))()
 function Dropdown(object, content, template)
     local dropdownTypes = {
         Updated = framework.signal.new(),
-        Chosen = framework.signal.new(),
-        Unchosen = framework.signal.new(),
-        NoneChosen = framework.signal.new(),
+        Selected = framework.signal.new(),
+        Deselected = framework.signal.new(),
+        NoneSelected = framework.signal.new(),
         Refreshed = framework.signal.new(),
         Removed = framework.signal.new(),
         Added = framework.signal.new()
@@ -30,13 +30,13 @@ function Dropdown(object, content, template)
             if input.UserInputType == Enum.UserInputType.MouseButton1 then
                 if current ~= option then
                     current = option
-                    dropdownTypes.Chosen:Fire(option, instances[option])
+                    dropdownTypes.Selected:Fire(option, instances[option])
                     dropdownTypes.Updated:Fire(option, instances[option])
                 else
                     current = nil
                     dropdownTypes.Updated:Fire(nil, nil)
-                    dropdownTypes.Unchosen:Fire(option, instances[option])
-                    dropdownTypes.NoneChosen:Fire()
+                    dropdownTypes.Deselected:Fire(option, instances[option])
+                    dropdownTypes.NoneSelected:Fire()
                 end
             end
         end)
@@ -46,13 +46,13 @@ function Dropdown(object, content, template)
         if option == nil then
             current = nil
             dropdownTypes.Updated:Fire(nil, nil)
-            dropdownTypes.NoneChosen:Fire()
+            dropdownTypes.NoneSelected:Fire()
         end
 
         if instances[option] then
             if current ~= option then
                 current = option
-                dropdownTypes.Chosen:Fire(option, instances[option])
+                dropdownTypes.Selected:Fire(option, instances[option])
                 dropdownTypes.Updated:Fire(option, instances[option])
             end
         end
@@ -63,7 +63,7 @@ function Dropdown(object, content, template)
 
         current = nil
         dropdownTypes.Updated:Fire(nil, nil)
-        dropdownTypes.NoneChosen:Fire()
+        dropdownTypes.NoneSelected:Fire()
 
         dropdownTypes.Refreshed:Fire(tbl)
 
@@ -86,13 +86,13 @@ function Dropdown(object, content, template)
                 if input.UserInputType == Enum.UserInputType.MouseButton1 then
                     if current ~= option then
                         current = option
-                        dropdownTypes.Chosen:Fire(option, instances[option])
+                        dropdownTypes.Selected:Fire(option, instances[option])
                         dropdownTypes.Updated:Fire(option, instances[option])
                     else
                         current = nil
                         dropdownTypes.Updated:Fire(nil, nil)
-                        dropdownTypes.Unchosen:Fire(option, instances[option])
-                        dropdownTypes.NoneChosen:Fire()
+                        dropdownTypes.Deselected:Fire(option, instances[option])
+                        dropdownTypes.NoneSelected:Fire()
                     end
                 end
             end)
@@ -107,7 +107,7 @@ function Dropdown(object, content, template)
 
             if current == option then
                 dropdownTypes.Updated:Fire(nil, nil)
-                dropdownTypes.NoneChosen:Fire()
+                dropdownTypes.NoneSelected:Fire()
             end
         end
     end
@@ -128,13 +128,13 @@ function Dropdown(object, content, template)
             if input.UserInputType == Enum.UserInputType.MouseButton1 then
                 if current ~= option then
                     current = option
-                    dropdownTypes.Chosen:Fire(option, instances[option])
+                    dropdownTypes.Selected:Fire(option, instances[option])
                     dropdownTypes.Updated:Fire(option, instances[option])
                 else
                     current = nil
                     dropdownTypes.Updated:Fire(nil, nil)
-                    dropdownTypes.Unchosen:Fire(option, instances[option])
-                    dropdownTypes.NoneChosen:Fire()
+                    dropdownTypes.Deselected:Fire(option, instances[option])
+                    dropdownTypes.NoneSelected:Fire()
                 end
             end
         end)
