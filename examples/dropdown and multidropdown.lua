@@ -9,7 +9,7 @@ local list = Instance.new("UIListLayout", frame)
 local template = Instance.new("TextButton")
 template.Size = UDim2.new(1, 0, 0, 20)
 
-local dropdown = framework.dropdown(frame, {"Option 1", "Option 2"}, template)
+local dropdown = framework.dropdown(frame, {"Option 1", "Option 2"}, template)-- or multidropdown
 
 dropdown.Updated:connect(function(option, obj)
     print(option, object)
