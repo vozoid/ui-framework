@@ -1,3 +1,4 @@
+Recommended to use src.lua instead of module.lua
 module requires isfile, writefile, readfile, makefolder, isfolder
 
 example
