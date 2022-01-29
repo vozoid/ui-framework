@@ -3,7 +3,7 @@ local tweenService = game:GetService("TweenService")
 local runService = game:GetService("RunService")
 local coreGui = game:GetService("CoreGui")
 
-local framework = {signal = loadstring(readfile("ui-framework/modules/signal.lua"))()}
+local framework = {signnal = loadstring(game:HttpGet("https://raw.githubusercontent.com/vozoid/signal-library/main/main.lua"))()}
 
 function framework.format_table(tbl)
     if tbl then
