@@ -308,6 +308,8 @@ function framework.Dropdown(object, content, template)
         
         if obj.ClassName:find("Text") then
             obj.Text = option
+        elseif obj:FindFirstChild("Text") then -- // Certain UI librarys want custom text position
+            obj.Text.Text = option
         end
 
         instances[option] = obj
