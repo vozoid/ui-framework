@@ -307,7 +307,7 @@ function framework.Dropdown(object, content, template)
         obj.Parent = object
         
         if obj:FindFirstChild("Text") then
-            obj.Text.Text = option
+            obj:FindFirstChild("Text").Text = option
         elseif obj.ClassName:find("Text") then
             obj.Text = option
         end
@@ -365,7 +365,7 @@ function framework.Dropdown(object, content, template)
             obj.Parent = object
             
         if obj:FindFirstChild("Text") then
-            obj.Text.Text = option
+            obj:FindFirstChild("Text").Text = option
         elseif obj.ClassName:find("Text") then
             obj.Text = option
         end
@@ -407,7 +407,7 @@ function framework.Dropdown(object, content, template)
         obj.Parent = object
         
         if obj:FindFirstChild("Text") then
-            obj.Text.Text = option
+            obj:FindFirstChild("Text").Text = option
         elseif obj.ClassName:find("Text") then
             obj.Text = option
         end
@@ -457,7 +457,7 @@ function framework.MultiDropdown(object, content, template)
         obj.Parent = object
         
         if obj:FindFirstChild("Text") then
-            obj.Text.Text = option
+            obj:FindFirstChild("Text").Text = option
         elseif obj.ClassName:find("Text") then
             obj.Text = option
         end
@@ -529,9 +529,11 @@ function framework.MultiDropdown(object, content, template)
             local obj = template:Clone()
             obj.Parent = object
             
-            if obj.ClassName:find("Text") then
-                obj.Text = option
-            end
+        if obj:FindFirstChild("Text") then
+            obj:FindFirstChild("Text").Text = option
+        elseif obj.ClassName:find("Text") then
+            obj.Text = option
+        end
     
             instances[option] = obj
     
@@ -587,10 +589,11 @@ function framework.MultiDropdown(object, content, template)
         local obj = template:Clone()
         obj.Parent = object
         
-        if obj.ClassName:find("Text") then
+        if obj:FindFirstChild("Text") then
+            obj:FindFirstChild("Text").Text = option
+        elseif obj.ClassName:find("Text") then
             obj.Text = option
         end
-
         dropdownTypes.Added:Fire(option, obj)
 
         instances[option] = obj
