@@ -307,9 +307,9 @@ function framework.Dropdown(object, content, template)
         obj.Parent = object
         
         if obj:FindFirstChild("Text") then
-            obj:FindFirstChild("Text").Text = option
+            obj:FindFirstChild("Text").Text = tostring(option)
         elseif obj.ClassName:find("Text") then
-            obj.Text = option
+            obj.Text = tostring(option)
         end
 
         instances[option] = obj
