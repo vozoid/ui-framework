@@ -167,7 +167,7 @@ function framework.Box(object)
     return boxTypes
 end
 
-function framework.SizeSlider(slider, fill, min, max, tweenInfo, mainUI)
+function framework.SizeSlider(slider, fill, min, max, tweenInfo)
     local min = min or 1
     local max = max or 100
     local tweenInfo = tweenInfo or {0}
@@ -177,7 +177,8 @@ function framework.SizeSlider(slider, fill, min, max, tweenInfo, mainUI)
     end
 
     local sliderTypes = {
-        Updated = framework.signal.new()
+        Updated = framework.signal.new(),
+        Input = framework.signal.new()
     }
 
     sliderTypes = framework.format_table(sliderTypes)
@@ -193,16 +194,16 @@ function framework.SizeSlider(slider, fill, min, max, tweenInfo, mainUI)
 
     slider.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            mainUI.Draggable = false
             sliding = true
+            sliderTypes.Input:Fire(sliding)
             slide(input)
         end
     end)
 
     slider.InputEnded:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
-            mainUI.Draggable = true
             sliding = false
+            sliderTypes.Input:Fire(sliding)
         end
     end)
 
