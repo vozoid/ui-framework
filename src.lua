@@ -171,6 +171,7 @@ function framework.SizeSlider(slider, fill, min, max, tweenInfo)
     local min = min or 1
     local max = max or 100
     local tweenInfo = tweenInfo or {0}
+    local sliding = false
 
     if typeof(tweenInfo) == "number" then
         tweenInfo = {tweenInfo}
@@ -228,6 +229,7 @@ function framework.PositionSlider(slider, ball, min, max, tweenInfo)
     local min = min or 1
     local max = max or 100
     local tweenInfo = tweenInfo or {0}
+    local sliding = false
 
     if typeof(tweenInfo) == "number" then
         tweenInfo = {tweenInfo}
