@@ -14,7 +14,7 @@ if readfile("ui-framework/version.txt") ~= game:HttpGet("https://raw.githubuserc
 
     makefolder("ui-framework/modules")
     -- modules
-    writefile("ui-framework/modules/signal.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/signal-library/main/main.lua"))
+    writefile("ui-framework/modules/signal.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/signal.lua"))
     writefile("ui-framework/modules/framework.lua", game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/modules/framework.lua"))
 
     makefolder("ui-framework/modules/objects")
