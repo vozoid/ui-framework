@@ -178,7 +178,8 @@ function framework.SizeSlider(slider, fill, min, max, tweenInfo)
     end
 
     local sliderTypes = {
-        Updated = framework.signal.new()
+        Updated = framework.signal.new(),
+        Input = framework.signal.new()
     }
 
     sliderTypes = framework.format_table(sliderTypes)
@@ -195,6 +196,7 @@ function framework.SizeSlider(slider, fill, min, max, tweenInfo)
     slider.InputBegan:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             sliding = true
+            sliderTypes.Input:Fire(sliding)
             slide(input)
         end
     end)
@@ -202,6 +204,7 @@ function framework.SizeSlider(slider, fill, min, max, tweenInfo)
     slider.InputEnded:Connect(function(input)
         if input.UserInputType == Enum.UserInputType.MouseButton1 then
             sliding = false
+            sliderTypes.Input:Fire(sliding)
         end
     end)
 
@@ -308,8 +311,10 @@ function framework.Dropdown(object, content, template)
         local obj = template:Clone()
         obj.Parent = object
         
-        if obj.ClassName:find("Text") then
-            obj.Text = option
+        if obj:FindFirstChild("Text") then
+            obj:FindFirstChild("Text").Text = tostring(option)
+        elseif obj.ClassName:find("Text") then
+            obj.Text = tostring(option)
         end
 
         instances[option] = obj
@@ -364,9 +369,11 @@ function framework.Dropdown(object, content, template)
             local obj = template:Clone()
             obj.Parent = object
             
-            if obj.ClassName:find("Text") then
-                obj.Text = option
-            end
+        if obj:FindFirstChild("Text") then
+            obj:FindFirstChild("Text").Text = option
+        elseif obj.ClassName:find("Text") then
+            obj.Text = option
+        end
     
             instances[option] = obj
     
@@ -404,7 +411,9 @@ function framework.Dropdown(object, content, template)
         local obj = template:Clone()
         obj.Parent = object
         
-        if obj.ClassName:find("Text") then
+        if obj:FindFirstChild("Text") then
+            obj:FindFirstChild("Text").Text = option
+        elseif obj.ClassName:find("Text") then
             obj.Text = option
         end
 
@@ -452,7 +461,9 @@ function framework.MultiDropdown(object, content, template)
         local obj = template:Clone()
         obj.Parent = object
         
-        if obj.ClassName:find("Text") then
+        if obj:FindFirstChild("Text") then
+            obj:FindFirstChild("Text").Text = option
+        elseif obj.ClassName:find("Text") then
             obj.Text = option
         end
 
@@ -523,9 +534,11 @@ function framework.MultiDropdown(object, content, template)
             local obj = template:Clone()
             obj.Parent = object
             
-            if obj.ClassName:find("Text") then
-                obj.Text = option
-            end
+        if obj:FindFirstChild("Text") then
+            obj:FindFirstChild("Text").Text = option
+        elseif obj.ClassName:find("Text") then
+            obj.Text = option
+        end
     
             instances[option] = obj
     
@@ -581,10 +594,11 @@ function framework.MultiDropdown(object, content, template)
         local obj = template:Clone()
         obj.Parent = object
         
-        if obj.ClassName:find("Text") then
+        if obj:FindFirstChild("Text") then
+            obj:FindFirstChild("Text").Text = option
+        elseif obj.ClassName:find("Text") then
             obj.Text = option
         end
-
         dropdownTypes.Added:Fire(option, obj)
 
         instances[option] = obj
