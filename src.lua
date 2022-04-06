@@ -3,7 +3,7 @@ local tweenService = game:GetService("TweenService")
 local runService = game:GetService("RunService")
 local coreGui = game:GetService("CoreGui")
 
-local framework = {signal = loadstring(game:HttpGet("https://raw.githubusercontent.com/vozoid/signal-library/main/main.lua"))()}
+local framework = {signal = loadstring(game:HttpGet("https://raw.githubusercontent.com/vozoid/ui-framework/main/signal.lua"))()}
 
 function framework.format_table(tbl)
     if tbl then
@@ -171,6 +171,7 @@ function framework.SizeSlider(slider, fill, min, max, tweenInfo)
     local min = min or 1
     local max = max or 100
     local tweenInfo = tweenInfo or {0}
+    local sliding = false
 
     if typeof(tweenInfo) == "number" then
         tweenInfo = {tweenInfo}
@@ -231,6 +232,7 @@ function framework.PositionSlider(slider, ball, min, max, tweenInfo)
     local min = min or 1
     local max = max or 100
     local tweenInfo = tweenInfo or {0}
+    local sliding = false
 
     if typeof(tweenInfo) == "number" then
         tweenInfo = {tweenInfo}
